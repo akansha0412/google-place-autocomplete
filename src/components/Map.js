@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css'; // Import Leaflet's CSS
-import withMapData from './mock/hoc/withMapData';
+import withMapData from './hoc/withMapData';
 
 const Map = ({ selectedPlace }) => {
   const mapRef = useRef(null); // Use a ref to store the map instance

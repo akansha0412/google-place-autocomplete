@@ -1,5 +1,5 @@
 
-import { ADD_TO_SELECTED_PLACE } from '../actions/mapAction';
+import { ADD_TO_SELECTED_PLACE } from '../actions/actionTypes';
 
 const initialState = {
 selectedPlace: {},

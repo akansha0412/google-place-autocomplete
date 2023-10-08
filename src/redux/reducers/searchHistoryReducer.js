@@ -1,6 +1,6 @@
 // searchHistoryReducer.js
 
-import { ADD_TO_SEARCH_HISTORY } from '../actions/searchHistoryAction';
+import { ADD_TO_SEARCH_HISTORY } from '../actions/actionTypes';
 
 const initialState = {
   history: [],

@@ -1,6 +1,6 @@
 // autocompleteReducer.js
 
-import { FETCH_AUTOCOMPLETE_SUCCESS} from '../actions/autocompleteAction';
+import { FETCH_AUTOCOMPLETE_SUCCESS} from '../actions/actionTypes';
 
 const initialState = {
   results: [],

@@ -1,9 +1,7 @@
 // autocompleteActions.js
 
 import { mockData } from '../../components/mock/data';
-
-// Action Types
-export const FETCH_AUTOCOMPLETE_SUCCESS = 'FETCH_AUTOCOMPLETE_SUCCESS';
+import { FETCH_AUTOCOMPLETE_SUCCESS } from './actionTypes';
 
 // Action Creators
 export const fetchAutocompleteSuccess = (results) => ({

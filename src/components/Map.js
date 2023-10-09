@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css'; // Import Leaflet's CSS
 import withMapData from './hoc/withMapData';
+import AutocompleteInput from './ AutocompleteInput';
 
 const Map = ({ selectedPlace }) => {
   const mapRef = useRef(null); // Use a ref to store the map instance
@@ -39,9 +40,11 @@ const Map = ({ selectedPlace }) => {
   }, [selectedPlace]);
 
   return (
-    <div>
-      <div id="map" style={{ height: '400px', width: '100%' }}></div>
-    </div>
+    <>
+      <div id="map" style={{ height: '100vh', width: '100%' }}>
+      <AutocompleteInput />
+      </div>
+    </>
   );
 };
 

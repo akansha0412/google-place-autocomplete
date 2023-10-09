@@ -3,14 +3,14 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Input, List } from 'antd';
-import { addToSearchHistory } from '../redux/actions/searchHistoryAction';
 import { addToSelectedPlace } from '../redux/actions/mapAction';
-import { fetchAutocompleteSuccess } from '../redux/actions/autocompleteAction';
+import { fetchAutocompleteSuccess,addToSearchHistory } from '../redux/actions/autocompleteAction';
 import { mockData } from './mock/data';
 
-const AutocompleteInput = ({ results, addToSearchHistory,addToSelectedPlace, fetchAutocompleteSuccess }) => {
+const AutocompleteInput = ({ results, searchHistory,addToSearchHistory,addToSelectedPlace, fetchAutocompleteSuccess }) => {
   const [value, setValue] = useState('');
   const [isopen,setIsOpen]=useState(false);
+  const [isshowHistory,setIsShowHistory] = useState(false)
 
   const divStyle={
     position: 'relative',
@@ -20,6 +20,7 @@ const AutocompleteInput = ({ results, addToSearchHistory,addToSelectedPlace, fet
     fontSize:'14px',
     margin:'18px',
     width:'500px',
+    zIndex:'9999'
   };
 
   const listStyle={
@@ -30,36 +31,46 @@ const AutocompleteInput = ({ results, addToSearchHistory,addToSelectedPlace, fet
     borderRadius:'4px',
     background: '#fff',
     padding: '8px',
-    top:'77px',
-    zIndex:'999'
+    top:'50px',
+    zIndex:'9999'
   }
 
-  const handleInputChange = (e) => {
-    console.log(e)
-    setValue(e.target.value);
-    setIsOpen(e.target.value?true:false)
+  const handleInputChange = (value) => {
+    setValue(value);
+    setIsOpen(value?true:false)
+    setIsShowHistory(false)
     const filteredResults = mockData.filter((place) =>
-      place.description.toLowerCase().includes(e.target.value.toLowerCase())
+      place.description.toLowerCase().includes(value.toLowerCase())
     );
-    fetchAutocompleteSuccess(e.target.value?filteredResults:[]);
+    fetchAutocompleteSuccess(value?filteredResults:[]);
   };
 
   const handleSelectPlace = (place) => {
-    addToSearchHistory(place.description);
+    addToSearchHistory(place);
     addToSelectedPlace(place)
     setValue(place.description);
     setIsOpen(false)
   };
+
+  const handleSelectedHistory = (place)=>{
+    addToSelectedPlace(place)
+    setIsShowHistory(false)
+  }
+
+  const showHistory = ()=>{
+    setIsShowHistory(true)
+  }
 
   return (
     <div style={divStyle}>
       <Input
         placeholder="Search places..."
         value={value}
-        onChange={(e) => handleInputChange(e)}
+        onChange={(e) => handleInputChange(e.target.value)}
         style={inputStyle}
+        onClick={showHistory}
       />
-    { isopen && <List
+    { isopen ? <List
         dataSource={results}
         style={listStyle}
         renderItem={(item) => (
@@ -67,13 +78,22 @@ const AutocompleteInput = ({ results, addToSearchHistory,addToSelectedPlace, fet
             {item.description}
           </List.Item>
         )}
-      />}
+      />:isshowHistory?<List
+      dataSource={searchHistory}
+      style={listStyle}
+      renderItem={(item) => (
+        <List.Item onClick={() => handleSelectedHistory(item)}>
+          {item.description}
+        </List.Item>
+      )}
+    />:null}
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
   results: state.autocomplete.results,
+  searchHistory: state.autocomplete.history,
 });
 
 export default connect(mapStateToProps, { addToSearchHistory, addToSelectedPlace,fetchAutocompleteSuccess })(AutocompleteInput);

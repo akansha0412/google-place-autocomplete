@@ -1,12 +1,17 @@
 // autocompleteActions.js
 
 import { mockData } from '../../components/mock/data';
-import { FETCH_AUTOCOMPLETE_SUCCESS } from './actionTypes';
+import { ADD_TO_SEARCH_HISTORY, FETCH_AUTOCOMPLETE_SUCCESS } from './actionTypes';
 
 // Action Creators
 export const fetchAutocompleteSuccess = (results) => ({
   type: FETCH_AUTOCOMPLETE_SUCCESS,
   payload: results,
+});
+
+export const addToSearchHistory = (place) => ({
+  type: ADD_TO_SEARCH_HISTORY,
+  payload: place,
 });
 
 

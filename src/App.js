@@ -1,9 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store'; // Import your Redux store
-import AutocompleteInput from './components/ AutocompleteInput';
 import Map from './components/Map';
-import SearchHistory from './components/SearchHistory';
 import { Layout,Space } from 'antd';
 
 const App = () => {
@@ -29,9 +27,7 @@ const App = () => {
       <Layout>
         <Header style={headerStyle}>Google Place Autocomplete</Header>
         <Content style={contentStyle}>
-          <AutocompleteInput />
           <Map />
-          <SearchHistory />
         </Content>
       </Layout>
       </Space>

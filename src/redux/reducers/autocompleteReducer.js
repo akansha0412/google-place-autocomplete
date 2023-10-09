@@ -1,9 +1,10 @@
 // autocompleteReducer.js
 
-import { FETCH_AUTOCOMPLETE_SUCCESS} from '../actions/actionTypes';
+import { ADD_TO_SEARCH_HISTORY, FETCH_AUTOCOMPLETE_SUCCESS} from '../actions/actionTypes';
 
 const initialState = {
   results: [],
+  history: [],
 };
 
 const autocompleteReducer = (state = initialState, action) => {
@@ -13,6 +14,11 @@ const autocompleteReducer = (state = initialState, action) => {
         ...state,
         results: action.payload,
       };
+      case ADD_TO_SEARCH_HISTORY:
+        return {
+          ...state,
+          history: [...state.history, action.payload],
+        };
     default:
       return state;
   }

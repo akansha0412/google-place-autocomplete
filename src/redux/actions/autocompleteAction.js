@@ -1,6 +1,6 @@
 // autocompleteActions.js
 
-import { mockData } from '../../components/mock/data';
+import { mockData } from '../../mock/data';
 import { ADD_TO_SEARCH_HISTORY, FETCH_AUTOCOMPLETE_SUCCESS } from './actionTypes';
 
 // Action Creators

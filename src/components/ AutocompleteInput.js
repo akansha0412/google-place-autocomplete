@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Input, List } from 'antd';
 import { addToSelectedPlace } from '../redux/actions/mapAction';
 import { fetchAutocompleteSuccess,addToSearchHistory } from '../redux/actions/autocompleteAction';
-import { mockData } from './mock/data';
+import { mockData } from '../mock/data';
 
 const AutocompleteInput = ({ results, searchHistory,addToSearchHistory,addToSelectedPlace, fetchAutocompleteSuccess }) => {
   const [value, setValue] = useState('');
